@@ -3,13 +3,13 @@
 namespace App\Actions\User;
 
 use App\Actions\CreateValidatorUsingFormRequest;
-use App\Http\Requests\StoreRegisterRequest;
+use App\Http\Requests\User\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Validation\ValidationException;
 
 class CreateUser
 {
-    public function __construct(protected CreateValidatorUsingFormRequest $createValidatorUsingFormRequest, protected StoreRegisterRequest $formRequest)
+    public function __construct(protected CreateValidatorUsingFormRequest $createValidatorUsingFormRequest, protected StoreUserRequest $formRequest)
     {
     }
 

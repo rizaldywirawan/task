@@ -6,7 +6,7 @@ use App\Actions\User\CreateUser;
 use App\Actions\User\DeleteUser;
 use App\Actions\User\UpdateUser;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreRegisterRequest;
+use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\Users\UserResource;
 use App\Models\User;
@@ -20,7 +20,7 @@ class UserController extends Controller
      *
      * @throws ValidationException
      */
-    public function store(StoreRegisterRequest $request, CreateUser $createUser): UserResource
+    public function store(StoreUserRequest $request, CreateUser $createUser): UserResource
     {
         $user = $createUser->handle($request->all());
         return new UserResource($user);
