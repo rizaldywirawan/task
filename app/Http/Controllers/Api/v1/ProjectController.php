@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Actions\Project\CreateProject;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Projects\StoreProjectRequest;
 use App\Http\Resources\Projects\ProjectCollection;
 use App\Http\Resources\Projects\ProjectResource;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class ProjectController extends Controller
 {
@@ -21,10 +24,12 @@ class ProjectController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @throws ValidationException
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request, CreateProject $createProject): ProjectResource
     {
-        //
+        $project = $createProject->handle($request->all());
+        return new ProjectResource($project);
     }
 
 
