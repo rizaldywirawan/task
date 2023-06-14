@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Actions\User\CreateUser;
 use App\Actions\User\DeleteUser;
+use App\Actions\User\UpdateUser;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRegisterRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\Users\UserResource;
 use App\Models\User;
 use Exception;
@@ -22,6 +24,18 @@ class UserController extends Controller
     {
         $user = $createUser->handle($request->all());
         return new UserResource($user);
+    }
+
+
+    /**
+     * Update existing user
+     *
+     * @throws ValidationException
+     */
+    public function update(UpdateUserRequest $request, User $user, UpdateUser $updateUser): UserResource
+    {
+        $updatedUser = $updateUser->handle($request->all(), $user);
+        return new UserResource($updatedUser);
     }
 
 
