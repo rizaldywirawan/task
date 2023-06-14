@@ -12,4 +12,8 @@ class Project extends Model
 
     protected $keyType = 'string';
     public $incrementing = false;
+
+    protected $fillable = [
+        'name'
+    ];
 }

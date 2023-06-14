@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Actions\Project\CreateProject;
 use App\Actions\Project\DeleteProject;
+use App\Actions\Project\UpdateProject;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Projects\StoreProjectRequest;
+use App\Http\Requests\Projects\UpdateProjectRequest;
 use App\Http\Resources\Projects\ProjectCollection;
 use App\Http\Resources\Projects\ProjectResource;
+use App\Http\Resources\Users\UserResource;
 use App\Models\Project;
 use Exception;
 use Illuminate\Http\Request;
@@ -46,10 +49,12 @@ class ProjectController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @throws ValidationException
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateProjectRequest $request, Project $project, UpdateProject $updateProject): ProjectResource
     {
-        //
+        $updatedProject = $updateProject->handle($request->all(), $project);
+        return new ProjectResource($updatedProject);
     }
 
 
