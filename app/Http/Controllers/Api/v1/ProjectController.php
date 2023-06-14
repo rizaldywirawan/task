@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Actions\Project\CreateProject;
+use App\Actions\Project\DeleteProject;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Projects\StoreProjectRequest;
 use App\Http\Resources\Projects\ProjectCollection;
 use App\Http\Resources\Projects\ProjectResource;
 use App\Models\Project;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -53,9 +55,10 @@ class ProjectController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * @throws Exception
      */
-    public function destroy(string $id)
+    public function destroy(Project $project, DeleteProject $deleteProject): ProjectResource
     {
-        //
+        return new ProjectResource($deleteProject->handle($project));
     }
 }
