@@ -4,7 +4,6 @@ namespace App\Actions;
 
 use App\Http\Requests\Auth\StoreLoginRequest;
 use Illuminate\Auth\AuthenticationException;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
@@ -20,7 +19,7 @@ class AuthenticateUser
      * @throws ValidationException
      * @throws AuthenticationException
      */
-    public function handle(array $request): ?Authenticatable
+    public function handle(array $request): array
     {
         $validatedRequest = $this->validate($request);
 
@@ -29,7 +28,12 @@ class AuthenticateUser
             'password' => $validatedRequest['password']
         ])) {
 
-            return Auth::user();
+            $user = Auth::user();
+
+            return [
+                ...$user->toArray(),
+                'token' => Auth::user()->createToken(now()->toString())->plainTextToken
+            ];
 
         } else {
             throw new AuthenticationException('Your credentials do not match.');

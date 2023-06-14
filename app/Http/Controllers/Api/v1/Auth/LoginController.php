@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Api\v1\Auth;
 
 use App\Actions\AuthenticateUser;
 use App\Http\Controllers\Controller;
@@ -17,10 +17,8 @@ class LoginController extends Controller
      * @throws AuthenticationException
      * @throws ValidationException
      */
-    public function store(StoreLoginRequest $request, AuthenticateUser $authenticateUser): UserResource
+    public function store(StoreLoginRequest $request, AuthenticateUser $authenticateUser): array
     {
-        $authenticated = $authenticateUser->handle($request->all());
-
-        return new UserResource($authenticated);
+        return $authenticateUser->handle($request->all());
     }
 }
