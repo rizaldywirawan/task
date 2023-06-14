@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Api\v1\Auth\LoginController;
+use App\Http\Controllers\Api\v1\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // version 1
 Route::prefix('v1')->group(function () {
     Route::middleware('guest')->post('login', [LoginController::class, 'store']);
+    Route::middleware('auth:sanctum')->apiResource('users', UserController::class);
 });
