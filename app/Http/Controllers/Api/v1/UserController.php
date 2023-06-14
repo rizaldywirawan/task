@@ -18,14 +18,21 @@ class UserController extends Controller
 {
     /**
      * Get all users
-     *
-     * @return UserCollection
      */
     public function index(): UserCollection
     {
         return new UserCollection(User::all());
     }
-    
+
+
+    /**
+     * Get specific user
+     */
+    public function show(User $user): UserResource
+    {
+        return new UserResource($user);
+    }
+
 
     /**
      * Create new user
