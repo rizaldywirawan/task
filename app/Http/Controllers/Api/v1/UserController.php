@@ -8,6 +8,7 @@ use App\Actions\User\UpdateUser;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
+use App\Http\Resources\Users\UserCollection;
 use App\Http\Resources\Users\UserResource;
 use App\Models\User;
 use Exception;
@@ -15,6 +16,17 @@ use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
+    /**
+     * Get all users
+     *
+     * @return UserCollection
+     */
+    public function index(): UserCollection
+    {
+        return new UserCollection(User::all());
+    }
+    
+
     /**
      * Create new user
      *
