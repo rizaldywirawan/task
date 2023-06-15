@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Actions\Task\AssignUserToTask;
+use App\Actions\Task\RemoveUserFromTask;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tasks\Assignees\StoreTaskAssigneeRequest;
 use App\Http\Resources\Tasks\TaskResource;
@@ -13,10 +14,6 @@ class TaskAssigneeController extends Controller
 {
     /**
      * Assign a task with a user
-     * @param StoreTaskAssigneeRequest $request
-     * @param Task $task
-     * @param AssignUserToTask $assignUserToTask
-     * @return TaskResource
      */
     public function store(StoreTaskAssigneeRequest $request, Task $task, AssignUserToTask $assignUserToTask): TaskResource
     {
@@ -24,5 +21,15 @@ class TaskAssigneeController extends Controller
         $assignedTask = $assignUserToTask->handle($task, $user);
 
         return new TaskResource($assignedTask);
+    }
+
+
+    /**
+     * Remove a user from a task
+     */
+    public function destroy(Task $task, User $user, RemoveUserFromTask $removeUserFromTask): TaskResource
+    {
+        $removeUserFromTask->handle($task, $user);
+        return new TaskResource($task->load('taskAssignees'));
     }
 }
