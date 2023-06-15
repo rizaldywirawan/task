@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Task\CreateTask;
+use App\Http\Requests\Tasks\StoreTaskRequest;
 use App\Http\Resources\Tasks\TaskCollection;
 use App\Http\Resources\Tasks\TaskResource;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class TaskController extends Controller
 {
@@ -20,10 +23,12 @@ class TaskController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @throws ValidationException
      */
-    public function store(Request $request)
+    public function store(StoreTaskRequest $request, CreateTask $createTask): TaskResource
     {
-        //
+        $task = $createTask->handle($request->all());
+        return new TaskResource($task->load('createdBy', 'updatedBy', 'deletedBy', 'project'));
     }
 
 
