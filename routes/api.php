@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\v1\Auth\LoginController;
 use App\Http\Controllers\Api\v1\ProjectController;
+use App\Http\Controllers\Api\v1\RegisterController;
 use App\Http\Controllers\Api\v1\UserController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
@@ -26,6 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // version 1
 Route::prefix('v1')->group(function () {
     Route::middleware('guest')->post('login', [LoginController::class, 'store']);
+    Route::middleware('guest')->post('register', [RegisterController::class, 'store']);
     Route::middleware('auth:sanctum')->apiResource('users', UserController::class);
     Route::middleware('auth:sanctum')->apiResource('projects', ProjectController::class);
     Route::middleware('auth:sanctum')->apiResource('tasks', TaskController::class);
