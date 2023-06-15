@@ -29,6 +29,14 @@ loginForm.addEventListener('submit', function (event) {
         }
 
     }).catch(error => {
+
+        if (error.response.status === 401) {
+            createInvalidColumn('email')
+
+            let errorMessages = error.response.data.message
+            createErrorMessageForColumn('email', [errorMessages])
+        }
+
         if (error.response.status === 422) {
 
             let errors = error.response.data.errors

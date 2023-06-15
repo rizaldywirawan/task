@@ -47,5 +47,5 @@
 @endsection
 
 @push('scripts')
-    <script src="@vite('resources/js/pages/register/index.js')" defer></script>
+    @vite('resources/js/pages/register/index.js')
 @endpush
