@@ -14,10 +14,21 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
+Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
+
+
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get('/', function () {
+        return view('pages.index');
+    });
+
+
+    Route::get('/projects', function() {
+        return view('pages.index');
+    });
+
+    Route::get('/users', function() {
+        return view('pages.index');
+    });
+});
