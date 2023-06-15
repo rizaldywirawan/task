@@ -6,12 +6,23 @@ use App\Actions\Task\AssignUserToTask;
 use App\Actions\Task\RemoveUserFromTask;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tasks\Assignees\StoreTaskAssigneeRequest;
+use App\Http\Resources\Tasks\TaskCollection;
 use App\Http\Resources\Tasks\TaskResource;
 use App\Models\Task;
 use App\Models\User;
 
 class TaskAssigneeController extends Controller
 {
+    /**
+     * Get a task with the assignees
+     */
+    public function index(Task $task): TaskResource
+    {
+        $task->load('taskAssignees');
+        return new TaskResource($task);
+    }
+
+
     /**
      * Assign a task with a user
      */
