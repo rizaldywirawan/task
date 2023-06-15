@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Actions\Project\AssignUserToProject;
+use App\Actions\Project\RemoveUserFromProject;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectAssignees\StoreProjectAssigneeRequest;
 use App\Http\Resources\Projects\ProjectResource;
@@ -30,5 +31,15 @@ class ProjectAssigneeController extends Controller
         $assignedProject = $assignUserToProject->handle($project, $user);
 
         return new ProjectResource($assignedProject);
+    }
+
+
+    /**
+     * Remove a user from a project
+     */
+    public function destroy(Project $project, User $user, RemoveUserFromProject $removeUserFromProject): ProjectResource
+    {
+        $removeUserFromProject->handle($project, $user);
+        return new ProjectResource($project->load('assignees'));
     }
 }
