@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Task\CreateTask;
+use App\Actions\Task\DeleteTask;
 use App\Http\Requests\Tasks\StoreTaskRequest;
 use App\Http\Resources\Tasks\TaskCollection;
 use App\Http\Resources\Tasks\TaskResource;
 use App\Models\Task;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -51,9 +53,10 @@ class TaskController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * @throws Exception
      */
-    public function destroy(string $id)
+    public function destroy(Task $task, DeleteTask $deleteTask): TaskResource
     {
-        //
+        return new TaskResource($deleteTask->handle($task));
     }
 }
