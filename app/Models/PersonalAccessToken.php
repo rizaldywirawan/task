@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use App\Traits\HasUuid;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class PersonalAccessToken extends \Laravel\Sanctum\PersonalAccessToken
 {
-    use HasFactory, HasUuid;
+    use HasFactory, HasUuids;
 
     protected $keyType = 'string';
     public $incrementing = false;
