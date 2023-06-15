@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\Task\CreateTask;
 use App\Actions\Task\DeleteTask;
+use App\Actions\Task\UpdateTask;
 use App\Http\Requests\Tasks\StoreTaskRequest;
 use App\Http\Resources\Tasks\TaskCollection;
 use App\Http\Resources\Tasks\TaskResource;
@@ -45,10 +46,12 @@ class TaskController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @throws ValidationException
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Task $task, UpdateTask $updateTask): TaskResource
     {
-        //
+        $updatedTask = $updateTask->handle($request->all(), $task);
+        return new TaskResource($updatedTask);
     }
 
     /**
