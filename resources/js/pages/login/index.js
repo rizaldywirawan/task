@@ -1,3 +1,6 @@
+import {createInvalidColumn, createErrorMessageForColumn, clearErrorMessages, restoreButton, buttonLoading} from "../../modules/form.js";
+
+
 const loginForm = document.querySelector('#login-form')
 const loginFormButton = loginForm.querySelector('button')
 
@@ -8,7 +11,7 @@ loginForm.addEventListener('submit', function (event) {
 
 
     // clear every error messages before form submission
-    clearErrorMessages()
+    clearErrorMessages(loginForm)
     buttonLoading(loginForm.querySelector('button'))
 
 
@@ -37,54 +40,7 @@ loginForm.addEventListener('submit', function (event) {
             }
         }
     }).finally(() => {
-        restoreButton(loginFormButton)
+        let loginFormButtonInner = `<i class="fa-solid fa-arrow-right mr-2"></i> Sign In`
+        restoreButton(loginFormButton, loginFormButtonInner)
     })
 })
-
-
-function createInvalidColumn(element) {
-    let errorElement = document.querySelector(`*[name=${element}]`)
-    errorElement.closest('.form-group').classList.add('border-red-400', 'border-2', 'rounded-lg')
-}
-
-
-function createErrorMessageForColumn(element, errors) {
-    let errorElement = document.querySelector(`*[name=${element}]`)
-    let errorElementFormGroup = errorElement.closest('.form-group')
-
-    let errorMessageElements = ''
-
-    for (let error of errors) {
-        errorMessageElements += `<span class="text-red-400 text-sm">${error}</span>`
-    }
-
-    let errorMessageContainer = document.createElement('div')
-    errorMessageContainer.classList.add('error-message-container')
-    errorMessageContainer.innerHTML = errorMessageElements
-    errorElementFormGroup.insertAdjacentElement('afterend', errorMessageContainer)
-}
-
-
-function clearErrorMessages() {
-    loginForm.querySelectorAll('.error-message-container').forEach(function(element) {
-        element.remove()
-    })
-
-    loginForm.querySelectorAll('*[name]').forEach(function(element) {
-        element.closest('.form-group').classList.remove('border-red-400', 'border-2', 'rounded-lg')
-    })
-
-}
-
-
-function buttonLoading(button) {
-    button.textContent = 'Loading ...'
-    button.classList.add('disabled:opacity-75')
-    button.setAttribute('disabled', true)
-}
-
-
-function restoreButton(button) {
-    button.innerHTML = '<i class="fa-solid fa-arrow-right mr-2"></i> Sign In'
-    button.removeAttribute('disabled')
-}

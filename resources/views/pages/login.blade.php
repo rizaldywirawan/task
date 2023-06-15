@@ -22,7 +22,7 @@
             <div class="form-group block rounded-lg bg-slate-200 w-full h-10 flex justify-center items-center p-6 mt-4">
                 <label class="w-full flex items-center">
                     <i class="fa-solid fa-key mr-4 text-slate-400"></i>
-                    <input type="password" name="password" class="bg-transparent outline-none w-full" placeholder="******">
+                    <input type="password" name="password" class="bg-transparent outline-none w-full" placeholder="Password">
                 </label>
             </div>
             <button class="w-full p-4 bg-blue-500 rounded-lg text-white outline-none text-md font-bold mt-8"><i class="fa-solid fa-arrow-right mr-2"></i> Sign In</button>
