@@ -59,4 +59,10 @@ class Task extends Model
     {
         return $this->belongsTo(Project::class,'project_id');
     }
+
+
+    public function taskAssignees()
+    {
+        return $this->belongsToMany(User::class, 'task_assignees')->using(TaskAssignee::class);
+    }
 }
