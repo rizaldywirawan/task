@@ -7,8 +7,8 @@ use App\Http\Controllers\Api\v1\ProjectController;
 use App\Http\Controllers\Api\v1\ProjectTaskController;
 use App\Http\Controllers\Api\v1\RegisterController;
 use App\Http\Controllers\Api\v1\TaskAssigneeController;
+use App\Http\Controllers\Api\v1\TaskController;
 use App\Http\Controllers\Api\v1\UserController;
-use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

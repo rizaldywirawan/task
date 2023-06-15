@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\v1;
 
 use App\Actions\Task\CreateTask;
 use App\Actions\Task\DeleteTask;
 use App\Actions\Task\UpdateTask;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Tasks\StoreTaskRequest;
 use App\Http\Resources\Tasks\TaskCollection;
 use App\Http\Resources\Tasks\TaskResource;
