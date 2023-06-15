@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Actions\Project\AssignUserToProject;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProjectAssignees\StoreProjectAssigneeRequest;
 use App\Http\Resources\Projects\ProjectResource;
 use App\Models\Project;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class ProjectAssigneeController extends Controller
 {
@@ -17,5 +18,17 @@ class ProjectAssigneeController extends Controller
     {
         $project->load('assignees');
         return new ProjectResource($project);
+    }
+
+
+    /**
+     * Assign a user to a project
+     */
+    public function store(StoreProjectAssigneeRequest $request, Project $project, AssignUserToProject $assignUserToProject): ProjectResource
+    {
+        $user = User::where('id', $request->input('user'))->firstOrFail();
+        $assignedProject = $assignUserToProject->handle($project, $user);
+
+        return new ProjectResource($assignedProject);
     }
 }

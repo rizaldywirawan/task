@@ -31,6 +31,6 @@ class Project extends Model
      */
     public function assignees(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'project_assignees');
+        return $this->belongsToMany(User::class, 'project_assignees')->using(ProjectAssignee::class);
     }
 }
