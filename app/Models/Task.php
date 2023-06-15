@@ -61,7 +61,7 @@ class Task extends Model
     }
 
 
-    public function taskAssignees()
+    public function assignees()
     {
         return $this->belongsToMany(User::class, 'task_assignees')->using(TaskAssignee::class);
     }

@@ -12,8 +12,8 @@ class RemoveUserFromTask
      */
     public function handle(Task $task, User $user): Task
     {
-        $task->taskAssignees()->detach($user->id);
+        $task->assignees()->detach($user->id);
 
-        return $task->load('taskAssignees');
+        return $task->load('assignees');
     }
 }

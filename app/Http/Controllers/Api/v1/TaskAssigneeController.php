@@ -17,7 +17,7 @@ class TaskAssigneeController extends Controller
      */
     public function index(Task $task): TaskResource
     {
-        $task->load('taskAssignees');
+        $task->load('assignees');
         return new TaskResource($task);
     }
 
@@ -40,6 +40,6 @@ class TaskAssigneeController extends Controller
     public function destroy(Task $task, User $user, RemoveUserFromTask $removeUserFromTask): TaskResource
     {
         $removeUserFromTask->handle($task, $user);
-        return new TaskResource($task->load('taskAssignees'));
+        return new TaskResource($task->load('assignees'));
     }
 }
