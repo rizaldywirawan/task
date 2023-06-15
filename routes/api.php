@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\v1\Auth\LoginController;
+use App\Http\Controllers\Api\v1\ProjectAssigneeController;
 use App\Http\Controllers\Api\v1\ProjectController;
 use App\Http\Controllers\Api\v1\ProjectTaskController;
 use App\Http\Controllers\Api\v1\RegisterController;
@@ -35,4 +36,5 @@ Route::prefix('v1')->group(function () {
     Route::middleware('auth:sanctum')->apiResource('tasks', TaskController::class);
     Route::middleware('auth:sanctum')->apiResource('tasks/{task}/assignees', TaskAssigneeController::class);
     Route::middleware('auth:sanctum')->apiResource('projects/{project}/tasks', ProjectTaskController::class);
+    Route::middleware('auth:sanctum')->apiResource('projects/{project}/assignees', ProjectAssigneeController::class);
 });
