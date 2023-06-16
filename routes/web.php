@@ -3,6 +3,7 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,9 +22,7 @@ Route::get('/register', [RegisterController::class, 'index'])->middleware('guest
 
 
 Route::middleware('auth:sanctum')->group(function() {
-    Route::get('/', function () {
-        return view('pages.index');
-    });
+    Route::get('/', [TaskController::class, 'index']);
 
 
     Route::get('/projects', function() {
@@ -33,4 +32,5 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/users', function() {
         return view('pages.index');
     });
+
 });
