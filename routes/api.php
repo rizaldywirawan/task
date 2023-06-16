@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\v1\ProjectAssigneeController;
 use App\Http\Controllers\Api\v1\ProjectController;
 use App\Http\Controllers\Api\v1\ProjectTaskController;
 use App\Http\Controllers\Api\v1\RegisterController;
+use App\Http\Controllers\Api\v1\TaskArrangeOrderController;
 use App\Http\Controllers\Api\v1\TaskAssigneeController;
 use App\Http\Controllers\Api\v1\TaskController;
 use App\Http\Controllers\Api\v1\UserController;
@@ -39,4 +40,5 @@ Route::prefix('v1')->group(function () {
     Route::middleware('auth:sanctum')->apiResource('tasks/{task}/assignees', TaskAssigneeController::class);
     Route::middleware('auth:sanctum')->apiResource('projects/{project}/tasks', ProjectTaskController::class);
     Route::middleware('auth:sanctum')->apiResource('projects/{project}/assignees', ProjectAssigneeController::class);
+    Route::middleware('auth:sanctum')->put('tasks/{task}/arrange-order', [TaskArrangeOrderController::class, 'update']);
 });
