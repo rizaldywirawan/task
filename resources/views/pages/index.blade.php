@@ -18,9 +18,18 @@
 
     <div id="task-container" class="flex flex-col gap-4 mt-4">
 
-        @foreach($user['tasks'] as $task)
+        @forelse($user['tasks'] as $task)
+
             @include('partials.card', [$task, $user])
-        @endforeach
+
+        @empty
+
+            <div class="w-full flex flex-col items-center justify-center absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">
+                <i class="fa-solid fa-check-double text-6xl text-blue-500"></i>
+                <span class="mt-4 font-medium text-blue-500">The task is empty, let's create a new one</span>
+            </div>
+
+        @endforelse
 
     </div>
 

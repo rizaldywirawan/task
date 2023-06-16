@@ -1,4 +1,4 @@
-<div id="navbar" class="fixed bottom-0 left-0 right-0 h-24 container max-w-xl mx-auto flex items-center justify-around border-t">
+<div id="navbar" class="fixed bottom-0 left-0 right-0 h-24 container max-w-xl mx-auto flex items-center justify-around border-t bg-white">
     <a href="{{ url('/') }}" class="navbar-item flex items-center justify-center flex-col gap-2 text-slate-300">
         <i class="fa-solid fa-house text-xl"></i>
         <span class="text-sm">Home</span>

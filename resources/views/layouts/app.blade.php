@@ -19,7 +19,7 @@
 </head>
 <body class="bg-slate-100">
 
-<main class="container max-w-xl mx-auto bg-white h-screen p-4 lg:px-8">
+<main class="container max-w-xl mx-auto bg-white h-screen p-4 lg:px-8 lg:pb-24 relative">
 
     @yield('content')
 
