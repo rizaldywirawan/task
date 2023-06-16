@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
+use App\Actions\Task\GetTasks;
+use Illuminate\Contracts\View\View;
 
 class TaskController extends Controller
 {
     /**
      * Get all user's tasks
      */
-    public function index()
+    public function index(GetTasks $getTasks): View
     {
-        $user = Auth::user();
-        $user->load('tasks');
-
-        return view('pages.index', compact('user'));
+        $tasks = $getTasks->handle();
+        return view('pages.index', compact('tasks'));
     }
 }
