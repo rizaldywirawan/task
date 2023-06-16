@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamp('completed_at')->nullable();
             $table->enum('status', ['To-do', 'On Progress', 'In Review', 'Done', 'Canceled'])->default('To-do');
             $table->enum('priority', ['#1', '#2', '#3', '#4'])->nullable();
-            $table->integer('order')->nullable();
+            $table->integer('order');
             $table->foreignUuid('project_id')->nullable()->references('id')->on('projects');
             $table->foreignUuid('created_by')->references('id')->on('users');
             $table->foreignUuid('updated_by')->nullable()->references('id')->on('users');

@@ -26,6 +26,19 @@ class Task extends Model
 
 
     /**
+     * Used to increase the order column automatically
+     * everytime task created using eloquent
+     */
+    public static function boot(): void
+    {
+        parent::boot();
+        self::creating(function ($model) {
+            $model->order = $model->max('order') + 1;
+        });
+    }
+
+
+    /**
      * User who create a task
      */
     public function createdBy(): BelongsTo
