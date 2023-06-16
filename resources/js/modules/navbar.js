@@ -8,8 +8,6 @@ navbar.querySelectorAll('.navbar-item').forEach(function(navbarMenuItem) {
 
     let navbarUrl = navbarMenuItem.getAttribute('href')
 
-    console.log(currentUrl, navbarUrl)
-
     if (currentUrl === navbarUrl) {
         navbarMenuItem.classList.add('text-blue-500')
         navbarMenuItem.classList.remove('text-slate-300')
